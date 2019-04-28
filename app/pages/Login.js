@@ -1,40 +1,47 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Alert } from "react-native";
 import Utils from "../common/Utils";
+var loginImage = require("../resources/images/login.png");
+var merchantIcon = require("../resources/images/merchant.png");
+var userIcon = require("../resources/images/user.png");
+var passwordIcon = require("../resources/images/password.png");
+var checkboxIcon = require("../resources/images/checkbox.png");
+var checkboxSelectedIcon = require("../resources/images/checkbox_selected.png");
 
-export default class Index extends Component {
+export default class Login extends Component {
     static navigationOptions = {
         header: null
     };
     constructor(props) {
         super(props);
-        this.state = { merchantNo: "", account: "", password: "", rememberPassword: false };
+        this.merchantNo = "";
+        this.account = "";
+        this.password = "";
+        this.state = { rememberPassword: false };
     }
-    onMerchantNoInput(merchantNo) {
-        this.setState({ merchantNo });
+    onMerchantNoInput = (merchantNo) => {
+        this.merchantNo = merchantNo;
     }
-    onAccountInput(account) {
-        this.setState({ account });
+    onAccountInput = (account) => {
+        this.account = account;
     }
-    onPasswordInput(password) {
-        this.setState({ password });
+    onPasswordInput = (password) => {
+        this.password = password;
     }
-    onLoginClick() {
-        Alert.alert("onLoginClick");
+    onLoginClick = () => {
+        this.props.navigation.navigate("Home");
     }
-    onRememberPasswordClick() {
-        this.setState({ rememberPassword: true });
+    onRememberPasswordClick = () => {
+        this.setState({ rememberPassword: !this.state.rememberPassword });
     }
-    renderCheckboxRememberPassword() {
-        let image = null;
-        if (this.state.rememberPassword) {
-            image = (<Image style={styles.checkboxRememberPasswordIcon} source={require("../resources/images/checkbox_selected.png")} />);
-        } else {
-            image = (<Image style={styles.checkboxRememberPasswordIcon} source={require("../resources/images/checkbox.png")} />);
-        }
+    onForgetPasswordClick = () => {
+        Alert.alert("onForgetPasswordClick");
+    }
+    renderCheckboxRememberPassword = () => {
+        let icon = this.state.rememberPassword ? checkboxSelectedIcon : checkboxIcon;
         return (
-            <TouchableOpacity style={styles.checkboxRememberPassword} activeOpacity={0.5} onPress={this.onRememberPasswordClick}>
-                {image}
+            <TouchableOpacity style={styles.checkboxRememberPassword} activeOpacity={0.8} onPress={this.onRememberPasswordClick}>
+                <Image style={styles.checkboxRememberPasswordIcon} source={icon} />
                 <Text style={styles.checkboxRememberPasswordText}>记住密码</Text>
             </TouchableOpacity>
         );
@@ -42,7 +49,7 @@ export default class Index extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.image} source={require("../resources/images/login.png")} />
+                <Image style={styles.image} source={loginImage} />
                 <View style={styles.login}>
                     <View style={styles.loginContainer}>
                         <View>
@@ -57,22 +64,25 @@ export default class Index extends Component {
                             <View style={styles.tabLine} />
                         </View>
                         <View style={[styles.inputContainer, { marginTop: Utils.px2dp(30) }]}>
-                            <Image style={styles.inputIcon} source={require("../resources/images/merchant.png")} />
+                            <Image style={styles.inputIcon} source={merchantIcon} />
                             <TextInput style={styles.input} placeholder="商户编号" placeholderTextColor="#A6ADB8" keyboardType="number-pad" onChangeText={this.onMerchantNoInput} />
                         </View>
                         <View style={styles.inputContainer}>
-                            <Image style={styles.inputIcon} source={require("../resources/images/user.png")} />
+                            <Image style={styles.inputIcon} source={userIcon} />
                             <TextInput style={styles.input} placeholder="账号" placeholderTextColor="#A6ADB8" onChangeText={this.onAccountInput} />
                         </View>
                         <View style={styles.inputContainer}>
-                            <Image style={styles.inputIcon} source={require("../resources/images/password.png")} />
+                            <Image style={styles.inputIcon} source={passwordIcon} />
                             <TextInput style={styles.input} placeholder="密码" placeholderTextColor="#A6ADB8" secureTextEntry={true} onChangeText={this.onPasswordInput} />
                         </View>
-                        <TouchableOpacity style={styles.btnLogin} activeOpacity={0.5} onPress={this.onLoginClick}>
+                        <TouchableOpacity style={styles.btnLogin} activeOpacity={0.8} onPress={this.onLoginClick}>
                             <Text style={styles.btnLoginText}>登录</Text>
                         </TouchableOpacity>
                         <View style={styles.loginBottom}>
                             {this.renderCheckboxRememberPassword()}
+                            <TouchableOpacity style={styles.btnForgetPassword} activeOpacity={0.8} onPress={this.onForgetPasswordClick}>
+                                <Text style={styles.btnForgetPasswordText}>找回密码</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -157,12 +167,14 @@ const styles = StyleSheet.create({
     loginBottom: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: Utils.px2dp(15)
+        justifyContent: "space-between",
+        width: Utils.px2dp(302)
     },
     checkboxRememberPassword: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between"
+        paddingTop: Utils.px2dp(15),
+        paddingBottom: Utils.px2dp(15)
     },
     checkboxRememberPasswordIcon: {
         width: Utils.px2dp(14),
@@ -172,5 +184,15 @@ const styles = StyleSheet.create({
         marginLeft: Utils.px2dp(5),
         fontSize: Utils.px2dp(14),
         color: "#A6ADB8"
-    }
+    },
+    btnForgetPassword: {
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: Utils.px2dp(15),
+        paddingBottom: Utils.px2dp(15)
+    },
+    btnForgetPasswordText: {
+        fontSize: Utils.px2dp(14),
+        color: "#A6ADB8"
+    },
 });

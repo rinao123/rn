@@ -2,17 +2,23 @@ import React, { Component } from "react";
 import { View, StyleSheet, StatusBar, Animated, Easing } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Splash from "./pages/Splash";
-import Index from "./pages/Index";
-import Cart from "./pages/Cart";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import OrderFood from "./pages/OrderFood";
+import SoldOut from "./pages/SoldOut";
+import Printer from "./pages/Printer";
 
 const AppNavigator = createStackNavigator(
   {
     Splash: { screen: Splash },
-    Index: { screen: Index },
-    Cart: { screen: Cart }
+    Login: { screen: Login },
+    Home: { screen: Home },
+    OrderFood: { screen: OrderFood },
+    SoldOut: { screen: SoldOut },
+    Printer: { screen: Printer }
   },
   {
-    initialRouteName: "Index",
+    initialRouteName: "Login",
     transitionConfig: () => ({
         transitionSpec: {
           duration: 500,
