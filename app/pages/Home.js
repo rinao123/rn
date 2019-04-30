@@ -33,9 +33,6 @@ export default class Home extends Component {
     onMenuItemClick = (page) => {
         this.props.navigation.push(page);
     }
-    getMenuItemExtractor = (item, index) => {
-        return index;
-    }
     renderMenuList = () => {
         return (
             <View style={styles.menuListContainer}>

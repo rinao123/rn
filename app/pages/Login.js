@@ -29,7 +29,7 @@ export default class Login extends Component {
         this.password = password;
     }
     onLoginClick = () => {
-        this.props.navigation.navigate("Home");
+        this.props.navigation.replace("Home");
     }
     onRememberPasswordClick = () => {
         this.setState({ rememberPassword: !this.state.rememberPassword });
@@ -47,6 +47,8 @@ export default class Login extends Component {
         );
     }
     render() {
+        Utils.getScreenWidth();
+        Utils.getScreenHeight();
         return (
             <View style={styles.container}>
                 <Image style={styles.image} source={loginImage} />
