@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Alert } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput } from "react-native";
 import Utils from "../common/Utils";
 var loginImage = require("../resources/images/login.png");
+var logoImage = require("../resources/images/logo.png");
 var merchantIcon = require("../resources/images/merchant.png");
 var userIcon = require("../resources/images/user.png");
 var passwordIcon = require("../resources/images/password.png");
 var checkboxIcon = require("../resources/images/checkbox.png");
 var checkboxSelectedIcon = require("../resources/images/checkbox_selected.png");
+var wechatIcon = require("../resources/images/wechat.png");
 
 export default class Login extends Component {
     static navigationOptions = {
@@ -35,7 +37,10 @@ export default class Login extends Component {
         this.setState({ rememberPassword: !this.state.rememberPassword });
     }
     onForgetPasswordClick = () => {
-        Alert.alert("onForgetPasswordClick");
+        
+    }
+    onWechatClick = () => {
+        
     }
     renderCheckboxRememberPassword = () => {
         let icon = this.state.rememberPassword ? checkboxSelectedIcon : checkboxIcon;
@@ -47,13 +52,12 @@ export default class Login extends Component {
         );
     }
     render() {
-        Utils.getScreenWidth();
-        Utils.getScreenHeight();
         return (
             <View style={styles.container}>
                 <Image style={styles.image} source={loginImage} />
                 <View style={styles.login}>
                     <View style={styles.loginContainer}>
+                        <Image style={styles.logo} source={logoImage} />
                         <View>
                             <View style={styles.tabsContainer}>
                                 <View style={styles.tab}>
@@ -86,6 +90,14 @@ export default class Login extends Component {
                                 <Text style={styles.btnForgetPasswordText}>找回密码</Text>
                             </TouchableOpacity>
                         </View>
+                        <View style={styles.separatorView}>
+                            <View style={styles.separator} />
+                            <Text style={styles.separatorText}>或者</Text>
+                            <View style={styles.separator} />
+                        </View>
+                        <TouchableOpacity style={styles.btnWechat} activeOpacity={0.8} onPress={this.onWechatClick}>
+                            <Image style={styles.btnWechatIcon} source={wechatIcon} />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -98,16 +110,23 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     image: {
-        width: Utils.px2dp(600),
+        width: Utils.px2dp(900),
         height: Utils.getScreenHeight()
     },
     login: {
         alignItems: "center",
-        flex: 1,
-        marginTop: Utils.px2dp(196)
+        justifyContent: "center",
+        marginTop: Utils.px2dp(33),
+        flex: 1
     },
     loginContainer: {
         alignItems: "flex-start",
+    },
+    logo: {
+        alignSelf: "center",
+        marginBottom: Utils.px2dp(34),
+        width: Utils.px2dp(186),
+        height: Utils.px2dp(86)
     },
     tabsContainer: {
         flexDirection: "row",
@@ -197,4 +216,31 @@ const styles = StyleSheet.create({
         fontSize: Utils.px2dp(14),
         color: "#A6ADB8"
     },
+    separatorView: {
+        flexDirection: "row",
+        alignItems: "center",
+        alignSelf: "center",
+        marginTop: Utils.px2dp(80)
+    },
+    separator: {
+        width: Utils.px2dp(130),
+        height: Utils.px2dp(1),
+        backgroundColor: "#DCDFE6"
+    },
+    separatorText: {
+        marginLeft: Utils.px2dp(7),
+        marginRight: Utils.px2dp(7),
+        fontSize: Utils.px2dp(14),
+        color: "#A6ADB8"
+    },
+    btnWechat: {
+        alignItems: "center",
+        justifyContent: "center",
+        alignSelf: "center",
+        marginTop: Utils.px2dp(15)
+    },
+    btnWechatIcon: {
+        width: Utils.px2dp(44),
+        height: Utils.px2dp(44)
+    }
 });

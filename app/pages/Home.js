@@ -56,11 +56,11 @@ export default class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.userName}>582991/小翁</Text>
-                <Text style={styles.account}>13265399506</Text>
                 <ScrollView style={styles.menuList} horizontal={true}>
                     {this.renderMenuList()}
                 </ScrollView>
+                <Text style={styles.userName}>582991/小翁</Text>
+                <Text style={styles.account}>13265399506</Text>
             </View>
         );
     }
@@ -68,27 +68,17 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        position: "relative",
         flex: 1,
         backgroundColor: "#34363A"
     },
-    userName: {
-        marginTop: Utils.px2dp(95),
-        marginLeft: Utils.px2dp(60),
-        fontSize: Utils.px2dp(24),
-        fontWeight: "bold",
-        color: "#FFFFFF"
-    },
-    account: {
-        marginTop: Utils.px2dp(1),
-        marginLeft: Utils.px2dp(60),
-        fontSize: Utils.px2dp(18),
-        color: "#FFFFFF"
-    },
     menuList: {
-        marginTop: Utils.px2dp(132)
+        width: Utils.getScreenWidth(),
+        height: Utils.getScreenHeight()
     },
     menuListContainer: {
         flexWrap: "wrap",
+        marginTop: Utils.getScreenHeight() - Utils.px2dp(460),
         marginLeft: Utils.px2dp(60),
         marginRight: Utils.px2dp(40),
         height: Utils.px2dp(400)
@@ -112,5 +102,20 @@ const styles = StyleSheet.create({
         fontSize: Utils.px2dp(18),
         fontWeight: "bold",
         color: "#303235"
+    },
+    userName: {
+        position: "absolute",
+        top: Utils.px2dp(100),
+        left: Utils.px2dp(60),
+        fontSize: Utils.px2dp(24),
+        fontWeight: "bold",
+        color: "#FFFFFF"
+    },
+    account: {
+        position: "absolute",
+        top: Utils.px2dp(134),
+        left: Utils.px2dp(60),
+        fontSize: Utils.px2dp(18),
+        color: "#FFFFFF"
     }
 });

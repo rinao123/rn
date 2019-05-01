@@ -154,11 +154,11 @@ export default class OrderFood extends Component {
     }
     showSelectSpec = () => {
         this.setState({ isShowSelectSpec: true }, () => {
-            Animated.timing(this.state.fadeInAnim, { toValue: 1, duration: 500 }).start();
+            Animated.timing(this.state.fadeInAnim, { toValue: 1, duration: 300 }).start();
         });
     }
     closeSelectSpec = () => {
-        Animated.timing(this.state.fadeInAnim, { toValue: 0, duration: 500 }).start(() => {
+        Animated.timing(this.state.fadeInAnim, { toValue: 0, duration: 300 }).start(() => {
             this.setState({ isShowSelectSpec: false });
         });
     }
