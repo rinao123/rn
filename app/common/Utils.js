@@ -1,6 +1,6 @@
 import { Dimensions, PixelRatio } from "react-native";
 
-var designWidth = 1366;
+const DESIGN_WIDTH = 1366;
 
 function getScreenWidth() {
     console.log("rinao getScreenWidth dp:" + Dimensions.get("window").width);
@@ -16,7 +16,7 @@ function getScreenHeight() {
 
 function px2dp(px) {
     let pixelRatio = PixelRatio.get();
-    return Math.max(Math.round(getScreenWidth() / (designWidth / pixelRatio) * px / pixelRatio), 1);
+    return Math.max(Math.round(getScreenWidth() / (DESIGN_WIDTH / pixelRatio) * px / pixelRatio), 1);
 }
 
 function formatPriceWithoutLastZero(price) {

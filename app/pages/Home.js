@@ -10,8 +10,11 @@ var settingIcon = require("../resources/images/setting.png");
 var callNumberIcon = require("../resources/images/call_number.png");
 var soldOutIcon = require("../resources/images/sold_out.png");
 var reportIcon = require("../resources/images/report.png");
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as menuAction from "../redux/actions/menuAction";
 
-export default class Home extends Component {
+class Home extends Component {
     static navigationOptions = {
         header: null,
         transitionConfig: null
@@ -20,14 +23,14 @@ export default class Home extends Component {
         super(props);
         this.menuList = [
             { icon: workspaceIcon, title: "工作台", page: "OrderFood" },
-            { icon: printerIcon, title: "打印", page: "Printer"  },
-            { icon: orderFoodIcon, title: "点餐", page: "OrderFood"  },
-            { icon: helpIcon, title: "帮助", page: "OrderFood"  },
-            { icon: orderIcon, title: "订单", page: "OrderFood"  },
-            { icon: settingIcon, title: "设置", page: "OrderFood"  },
-            { icon: callNumberIcon, title: "叫号", page: "OrderFood"  },
-            { icon: soldOutIcon, title: "沽清", page: "SoldOut"  },
-            { icon: reportIcon, title: "报表", page: "OrderFood"  }
+            { icon: printerIcon, title: "打印", page: "Printer" },
+            { icon: orderFoodIcon, title: "点餐", page: "OrderFood" },
+            { icon: helpIcon, title: "帮助", page: "OrderFood" },
+            { icon: orderIcon, title: "订单", page: "OrderFood" },
+            { icon: settingIcon, title: "设置", page: "OrderFood" },
+            { icon: callNumberIcon, title: "叫号", page: "OrderFood" },
+            { icon: soldOutIcon, title: "沽清", page: "SoldOut" },
+            { icon: reportIcon, title: "报表", page: "OrderFood" }
         ]
     }
     onMenuItemClick = (page) => {
@@ -45,7 +48,7 @@ export default class Home extends Component {
         for (let index in this.menuList) {
             let menu = this.menuList[index];
             menuList.push(
-                <TouchableOpacity style={styles.menuItem} activeOpacity={0.8} onPress={() => {this.onMenuItemClick(menu.page)}} key={index}>
+                <TouchableOpacity style={styles.menuItem} activeOpacity={0.8} onPress={() => { this.onMenuItemClick(menu.page) } } key={index}>
                     <Image style={styles.menuItemIcon} source={menu.icon} />
                     <Text style={styles.menuItemTitle}>{menu.title}</Text>
                 </TouchableOpacity>
@@ -54,6 +57,7 @@ export default class Home extends Component {
         return menuList;
     }
     render() {
+        
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.menuList} horizontal={true}>
@@ -61,10 +65,25 @@ export default class Home extends Component {
                 </ScrollView>
                 <Text style={styles.userName}>582991/小翁</Text>
                 <Text style={styles.account}>13265399506</Text>
+                <Text style={[styles.account, {top: Utils.px2dp(159)}]}>{this.props.count}</Text>
             </View>
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        count: state.menuReducer.count
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(menuAction, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
     container: {
