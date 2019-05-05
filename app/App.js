@@ -6,17 +6,16 @@ import store from "./redux/store";
 import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import OrderFood from "./pages/OrderFood";
+import Menu from "./pages/Menu";
 import SoldOut from "./pages/SoldOut";
 import Printer from "./pages/Printer";
-import { add } from "./redux/actions/menuAction";
 
 const AppNavigator = createStackNavigator(
     {
         Splash: { screen: Splash },
         Login: { screen: Login },
         Home: { screen: Home },
-        OrderFood: { screen: OrderFood },
+        Menu: { screen: Menu },
         SoldOut: { screen: SoldOut },
         Printer: { screen: Printer }
     },
@@ -52,12 +51,6 @@ const AppNavigator = createStackNavigator(
 const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends Component {
-
-    componentDidMount() {
-        setInterval(() => {
-            store.dispatch(add());
-        }, 2000);
-    }
 
     render() {
         return (

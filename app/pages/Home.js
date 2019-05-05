@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from "rea
 import Utils from "../common/Utils";
 var workspaceIcon = require("../resources/images/workspace.png");
 var printerIcon = require("../resources/images/printer.png");
-var orderFoodIcon = require("../resources/images/order_food.png");
+var menuIcon = require("../resources/images/menu.png");
 var helpIcon = require("../resources/images/help.png");
 var orderIcon = require("../resources/images/order.png");
 var settingIcon = require("../resources/images/setting.png");
@@ -14,7 +14,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as menuAction from "../redux/actions/menuAction";
 
-class Home extends Component {
+export default class Home extends Component {
     static navigationOptions = {
         header: null,
         transitionConfig: null
@@ -22,15 +22,15 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.menuList = [
-            { icon: workspaceIcon, title: "工作台", page: "OrderFood" },
+            { icon: workspaceIcon, title: "工作台", page: "Menu" },
             { icon: printerIcon, title: "打印", page: "Printer" },
-            { icon: orderFoodIcon, title: "点餐", page: "OrderFood" },
-            { icon: helpIcon, title: "帮助", page: "OrderFood" },
-            { icon: orderIcon, title: "订单", page: "OrderFood" },
-            { icon: settingIcon, title: "设置", page: "OrderFood" },
-            { icon: callNumberIcon, title: "叫号", page: "OrderFood" },
+            { icon: menuIcon, title: "点餐", page: "Menu" },
+            { icon: helpIcon, title: "帮助", page: "Menu" },
+            { icon: orderIcon, title: "订单", page: "Menu" },
+            { icon: settingIcon, title: "设置", page: "Menu" },
+            { icon: callNumberIcon, title: "叫号", page: "Menu" },
             { icon: soldOutIcon, title: "沽清", page: "SoldOut" },
-            { icon: reportIcon, title: "报表", page: "OrderFood" }
+            { icon: reportIcon, title: "报表", page: "Menu" }
         ]
     }
     onMenuItemClick = (page) => {
@@ -57,7 +57,6 @@ class Home extends Component {
         return menuList;
     }
     render() {
-        
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.menuList} horizontal={true}>
@@ -65,25 +64,10 @@ class Home extends Component {
                 </ScrollView>
                 <Text style={styles.userName}>582991/小翁</Text>
                 <Text style={styles.account}>13265399506</Text>
-                <Text style={[styles.account, {top: Utils.px2dp(159)}]}>{this.props.count}</Text>
             </View>
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        count: state.menuReducer.count
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(menuAction, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
     container: {

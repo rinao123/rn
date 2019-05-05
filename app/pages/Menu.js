@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Modal, Anima
 import LinearGradient from "react-native-linear-gradient";
 import FoodApi from "../apis/FoodApi";
 import Utils from "../common/Utils";
-var menuIcon = require("../resources/images/menu.png");
+var backIcon = require("../resources/images/back.png");
 var deleteIcon = require("../resources/images/delete.png");
 var subIcon = require("../resources/images/sub.png");
 var addIcon = require("../resources/images/add.png");
 var checkboxIcon = require("../resources/images/checkbox.png");
 var checkboxSelectedIcon = require("../resources/images/checkbox_selected.png");
 
-export default class OrderFood extends Component {
+export default class Menu extends Component {
     static navigationOptions = {
         header: null,
         transitionConfig: null
@@ -307,7 +307,7 @@ export default class OrderFood extends Component {
             <LinearGradient style={styles.container} colors={["#3F8ED3", "#0443AF"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
                 <View>
                     <TouchableOpacity style={styles.btnBack} activeOpacity={0.8} onPress={this.onBackClick}>
-                        <Image style={styles.btnBackIcon} source={menuIcon} />
+                        <Image style={styles.btnBackIcon} source={backIcon} />
                         <Text style={styles.btnBackText}>点餐</Text>
                     </TouchableOpacity>
                     <View style={styles.menuView}>
@@ -347,6 +347,20 @@ export default class OrderFood extends Component {
         );
     }
 }
+
+// function mapStateToProps(state) {
+//     return {
+//         count: state.menuReducer.count
+//     }
+// }
+
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         actions: bindActionCreators(menuAction, dispatch)
+//     }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Menu);
 
 const styles = StyleSheet.create({
     container: {
